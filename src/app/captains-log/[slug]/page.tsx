@@ -66,10 +66,10 @@ const posts = [
   },
   {
     slug: "welcome-to-the-captains-log",
-    title: "Welcome to The Captain's Log!",
+    title: "Welcome to The Captain&apos;s Log!",
     date: "2025-07-26",
     tags: ["intro", "news"],
-    content: `# Welcome!\nThis is the first entry in The Captain's Log. Stay tuned for devlogs, news, and more!`,
+    content: `# Welcome!\nThis is the first entry in The Captain&apos;s Log. Stay tuned for devlogs, news, and more!`,
   },
   {
     slug: "ai-art-gallery-behind-the-scenes",
