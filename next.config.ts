@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
+const repoName = "rocketmob-web";
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  assetPrefix: `/${repoName}/`,
+  basePath: `/${repoName}`,
 };
 
 export default nextConfig;

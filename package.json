@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "node scripts/updateSiteVersion.js && next build",
+    "export": "next export",
     "start": "next start",
     "lint": "next lint"
   },

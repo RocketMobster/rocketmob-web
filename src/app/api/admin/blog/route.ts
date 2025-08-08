@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // In-memory demo data (replace with DB in production)
-let posts = [
+const posts: any[] = [
   // ...initial posts (can import from demo data)
 ];
 
@@ -12,18 +12,21 @@ export async function GET() {
   return NextResponse.json(posts);
 }
 
-export async function POST(req: NextRequest) {
+
+export async function POST() {
   // TODO: Validate and add new post
   // Example: const newPost = await req.json(); posts.push(newPost);
   return NextResponse.json({ message: "Create post (not implemented)" }, { status: 501 });
 }
 
-export async function PUT(req: NextRequest) {
+
+export async function PUT() {
   // TODO: Validate and update post
   return NextResponse.json({ message: "Update post (not implemented)" }, { status: 501 });
 }
 
-export async function DELETE(req: NextRequest) {
+
+export async function DELETE() {
   // TODO: Delete post by id/slug
   return NextResponse.json({ message: "Delete post (not implemented)" }, { status: 501 });
 }
