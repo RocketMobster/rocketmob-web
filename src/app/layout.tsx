@@ -27,7 +27,24 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <header className="w-full bg-gray-950/90 border-b border-gray-800 shadow-lg sticky top-0 z-50">
+          <nav className="container mx-auto flex items-center justify-between py-4 px-4 md:px-8">
+            <a href="/" className="text-2xl font-extrabold tracking-tight text-pink-400 hover:text-pink-300 transition-colors">
+              🚀 RocketMobster
+            </a>
+            <ul className="flex gap-4 md:gap-8 text-lg font-semibold">
+              <li><a href="/apps" className="hover:text-pink-400 transition-colors">Apps</a></li>
+              <li><a href="/gallery" className="hover:text-blue-400 transition-colors">Gallery</a></li>
+              <li><a href="/captains-log" className="hover:text-green-400 transition-colors">The Captain's Log</a></li>
+              <li><a href="/about" className="hover:text-yellow-400 transition-colors">About</a></li>
+              <li><a href="/contact" className="hover:text-purple-400 transition-colors">Contact</a></li>
+              <li><a href="/admin" className="hover:text-red-400 transition-colors">Admin</a></li>
+            </ul>
+          </nav>
+        </header>
+        <main className="flex-1 w-full">
+          {children}
+        </main>
       </body>
     </html>
   );

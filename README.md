@@ -1,3 +1,20 @@
+# RocketMobster Software Public Website
+
+This is the official public website for RocketMobster Software, built with Next.js, TypeScript, and Tailwind CSS.
+
+## Features (per PRD)
+- Homepage with hero banner
+- Apps showcase grid
+- Individual app pages
+- AI art gallery
+- Blog/news section
+- About and contact pages
+- Admin backend (future)
+
+See `Product Requirements Document (PRD).md` for full details.
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
