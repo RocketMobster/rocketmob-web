@@ -83,11 +83,7 @@ const posts = [
 import React from "react";
 import type { Components } from "react-markdown";
 
-interface CaptainsLogParams {
-  slug: string;
-}
-
-export default function CaptainsLogPostPage({ params }: { params: CaptainsLogParams }) {
+export default function CaptainsLogPostPage({ params }: { params: { slug: string } }) {
   const post = posts.find((p) => p.slug === params.slug);
   if (!post) return notFound();
 
