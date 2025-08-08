@@ -3,9 +3,9 @@
 "use client";
 import { useState } from "react";
 
+
 export default function AdminBlogPage() {
   // TODO: Fetch posts from API
-  const [posts, setPosts] = useState([]);
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-8">

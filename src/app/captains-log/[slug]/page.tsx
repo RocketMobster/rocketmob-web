@@ -81,6 +81,7 @@ const posts = [
 ];
 
 import React from "react";
+import type { Components } from "react-markdown";
 
 interface CaptainsLogParams {
   slug: string;
@@ -91,8 +92,10 @@ export default function CaptainsLogPostPage({ params }: { params: CaptainsLogPar
   if (!post) return notFound();
 
   // Custom renderer for code blocks with label and styling
-  const components = {
+  const components: Components = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     code: (props: any) => {
+      // 'inline' is not always present, so check safely
       const { inline, className, children } = props;
       if (inline) {
         return <code className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 text-pink-600 dark:text-pink-300 text-sm font-mono">{children}</code>;
@@ -146,7 +149,7 @@ export default function CaptainsLogPostPage({ params }: { params: CaptainsLogPar
           rehypePlugins={[rehypeRaw]}
           components={components}
         >
-          {post.content}
+          {post.content.replace(/'/g, "&apos;")}
         </ReactMarkdown>
       </article>
     </main>
