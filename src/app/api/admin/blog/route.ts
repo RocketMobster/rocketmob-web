@@ -1,9 +1,16 @@
 // API route for admin CRUD operations on blog posts
 // TODO: Connect to a real database or persistent storage
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 // In-memory demo data (replace with DB in production)
-const posts: any[] = [
+interface BlogPost {
+  slug: string;
+  title: string;
+  date: string;
+  tags: string[];
+  content: string;
+}
+const posts: BlogPost[] = [
   // ...initial posts (can import from demo data)
 ];
 

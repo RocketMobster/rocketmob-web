@@ -107,7 +107,8 @@ export default function CaptainsLogPostPage({ params }: { params: CaptainsLogPar
       );
     },
     img(props: React.ImgHTMLAttributes<HTMLImageElement>) {
-      let { src, alt } = props;
+      let src = props.src;
+      const alt = props.alt;
       // Ensure src is always a string for Next.js Image
       if (typeof src !== "string") src = "";
       // Use next/image for gallery images, fallback to <img> for others
@@ -129,7 +130,7 @@ export default function CaptainsLogPostPage({ params }: { params: CaptainsLogPar
         transition={{ duration: 0.7 }}
         className="text-2xl sm:text-3xl font-bold mb-2 text-gradient bg-gradient-to-r from-yellow-400 to-pink-600 bg-clip-text text-transparent drop-shadow"
       >
-        {post.title}
+        {post.title.replace("'", "&apos;")}
       </motion.h1>
       <div className="text-sm text-gray-500 mb-4">{new Date(post.date).toLocaleDateString()}</div>
       <div className="flex flex-wrap gap-2 mb-4">

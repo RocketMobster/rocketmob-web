@@ -70,7 +70,7 @@ export default function CaptainsLogPage() {
         transition={{ duration: 0.7 }}
         className="text-3xl sm:text-4xl font-bold mb-6 text-center text-gradient bg-gradient-to-r from-yellow-400 to-pink-600 bg-clip-text text-transparent drop-shadow"
       >
-        📝 The Captain's Log
+        📝 The Captain&apos;s Log
       </motion.h1>
       <p className="text-center text-lg mb-6 text-gray-600 dark:text-gray-300">
         News, devlogs, and tips from RocketMobster Software.
