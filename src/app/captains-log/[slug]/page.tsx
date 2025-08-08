@@ -126,7 +126,7 @@ export default function CaptainsLogPostPage({ params }: { params: CaptainsLogPar
 
   return (
     <main className="max-w-2xl mx-auto px-4 py-8">
-      <Link href="/captains-log" className="text-blue-600 dark:text-yellow-400 hover:underline text-sm mb-4 inline-block">← Back to The Captain's Log</Link>
+      <Link href="/captains-log" className="text-blue-600 dark:text-yellow-400 hover:underline text-sm mb-4 inline-block">← Back to The Captain&apos;s Log</Link>
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
