@@ -1,7 +1,9 @@
 "use client";
 
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
+import Image from "next/image";
 
 
 import { GalleryImage } from "../types/gallery";
@@ -72,9 +74,11 @@ export default function GalleryModal({ open, image, onClose, onPrev, onNext }: G
             </button>
             <div className="w-full flex flex-col items-center">
               {image.type === "image" ? (
-                <img
-                  src={image.imageUrl}
+                <Image
+                  src={image.imageUrl || ""}
                   alt={image.title}
+                  width={480}
+                  height={320}
                   className="rounded-lg max-h-80 w-auto object-contain mb-4"
                   loading="lazy"
                 />

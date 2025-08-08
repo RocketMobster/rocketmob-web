@@ -1,5 +1,6 @@
 
 import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 import { GalleryImage } from "../types/gallery";
 
 
@@ -67,9 +68,11 @@ export default function GalleryImageCard({ item }: GalleryImageCardProps) {
       role="button"
     >
       {item.type === "image" ? (
-        <img
-          src={item.imageUrl}
+        <Image
+          src={item.imageUrl || ""}
           alt={item.title}
+          width={320}
+          height={192}
           className="w-full h-48 object-cover group-hover:opacity-80 transition-opacity"
           loading="lazy"
         />
@@ -88,9 +91,11 @@ export default function GalleryImageCard({ item }: GalleryImageCardProps) {
             aria-label={item.title}
           />
           {!isPreviewing && (
-            <img
-              src={item.thumbnailUrl || item.imageUrl}
+            <Image
+              src={item.thumbnailUrl || item.imageUrl || ""}
               alt={item.title}
+              width={320}
+              height={192}
               className="w-full h-48 object-cover rounded opacity-80"
               loading="lazy"
             />

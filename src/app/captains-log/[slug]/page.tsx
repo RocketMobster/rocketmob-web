@@ -82,14 +82,18 @@ const posts = [
 
 import React from "react";
 
-export default function CaptainsLogPostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = React.use(params);
-  const post = posts.find((p) => p.slug === slug);
+interface CaptainsLogParams {
+  slug: string;
+}
+
+export default function CaptainsLogPostPage({ params }: { params: CaptainsLogParams }) {
+  const post = posts.find((p) => p.slug === params.slug);
   if (!post) return notFound();
 
   // Custom renderer for code blocks with label and styling
   const components = {
-    code({ node, inline, className, children, ...props }: any) {
+    code: (props: any) => {
+      const { inline, className, children } = props;
       if (inline) {
         return <code className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 text-pink-600 dark:text-pink-300 text-sm font-mono">{children}</code>;
       }
@@ -97,20 +101,22 @@ export default function CaptainsLogPostPage({ params }: { params: Promise<{ slug
         <div className="mb-4">
           <div className="bg-gray-900 text-white text-xs font-bold px-3 py-1 rounded-t border-b border-gray-700 w-fit">Code:</div>
           <pre className="bg-gray-100 dark:bg-gray-900 border border-pink-400 dark:border-pink-600 rounded-b rounded-t-none p-4 overflow-x-auto text-sm font-mono">
-            <code className={className} {...props}>{children}</code>
+            <code className={className}>{children}</code>
           </pre>
         </div>
       );
     },
     img(props: React.ImgHTMLAttributes<HTMLImageElement>) {
-      const { src, alt } = props;
+      let { src, alt } = props;
+      // Ensure src is always a string for Next.js Image
+      if (typeof src !== "string") src = "";
       // Use next/image for gallery images, fallback to <img> for others
-      if (typeof src === "string" && src.startsWith("/gallery/")) {
+      if (src.startsWith("/gallery/")) {
         return (
           <Image src={src} alt={alt || "Gallery Image"} width={320} height={200} className="rounded shadow border border-gray-300 dark:border-gray-700" loading="lazy" />
         );
       }
-      return <img {...props} alt={alt || "Blog image"} loading="lazy" className="rounded shadow border border-gray-200 dark:border-gray-700" style={{ maxWidth: 320, maxHeight: 200 }} />;
+      return <Image src={src} alt={alt || "Blog image"} width={320} height={200} className="rounded shadow border border-gray-200 dark:border-gray-700" loading="lazy" />;
     },
   };
 
