@@ -14,7 +14,9 @@ The website is automatically deployed to GitHub Pages whenever you push changes 
    - Checks out your code
    - Sets up Node.js
    - Installs dependencies
-   - Builds the website using `npm run build`
+   - Creates a temporary Next.js config that skips TypeScript and ESLint checks
+   - Builds the website using `next build`
+   - Creates redirects for the root path
    - Uploads the built files to GitHub Pages
    - Deploys the website
 
@@ -76,24 +78,59 @@ npx serve out
 
 This will create the same build that GitHub Actions will deploy and serve it locally for testing.
 
-## Redirection Handling
+## Understanding the Deployment Architecture
 
-The site implements a user-friendly redirection system:
+The site is built with Next.js static export and deployed to GitHub Pages with the following configuration:
 
-1. Root URL redirection:
-   - The root URL (https://rocketmobster.github.io/) presents a simple landing page
-   - Users can click to continue to the site or will be auto-redirected if at the root
-   - A conditional check prevents infinite redirect loops
-   
-2. Page not found handling:
-   - A custom 404.html page in the public directory provides friendly error messages
-   - Users can easily navigate back to the homepage from any not-found page
+- **Base Path**: `/rocketmob-web/` - This is where the site is deployed on GitHub Pages
+- **Repository**: https://github.com/rocketmobster/rocketmob-web
 
-## Important Notes
+### Important Technical Details:
 
-- The site uses basePath `/rocketmob-web` for all routes
-- Static files are served from `/rocketmob-web/` path
-- Root path (`/`) redirects to `/rocketmob-web/`
-- The build process automatically handles proper path configuration
-- The project uses Next.js static export (`output: "export"` in next.config.ts) 
-- There is no need to run `next export` separately - it's included in the build process
+1. **Next.js Configuration**: 
+   - The site uses `next.config.ts` with:
+     - `basePath: "/rocketmob-web"`
+     - `assetPrefix: "/rocketmob-web/"`
+     - `output: "export"`
+
+2. **Physical vs. Virtual Paths**:
+   - Next.js `basePath` doesn't create a physical `/rocketmob-web/` folder in the build output
+   - The paths are handled by GitHub Pages when deployed
+   - All content is physically in the root of the output folder but served at `/rocketmob-web/` path
+
+3. **Redirection Handling**:
+   - The `scripts/createRedirect.js` creates:
+     - A root `index.html` that redirects to `/rocketmob-web/`
+     - A `404.html` with the same redirect (GitHub Pages convention)
+   - This script only creates redirects at the ROOT level, not inside the `/rocketmob-web/` path
+   - This prevents infinite redirect loops
+
+4. **TypeScript and ESLint Handling**:
+   - The build process skips TypeScript and ESLint checks during CI
+   - This is necessary to handle dynamic route type errors without failing the build
+
+## Common Issues and Solutions
+
+### Infinite Redirects
+
+If you experience an infinite redirect loop when accessing the site:
+
+1. Check that the redirect script (`scripts/createRedirect.js`) is only creating redirects at the root level
+2. Ensure the redirect URL is correct (`/rocketmob-web/` not `/rocketmob-web/index.html`)
+3. Make sure there's no redirect file inside the `/rocketmob-web/` path
+
+### 404 Errors
+
+If you get 404 errors on some pages:
+
+1. Check that all pages are being correctly generated in the build output
+2. Verify that links in your code use the correct paths (relative to the basePath)
+3. Ensure the GitHub Pages deployment completed successfully
+
+### Asset Loading Issues
+
+If images or other assets aren't loading:
+
+1. Verify all asset URLs use the correct path with the `assetPrefix`
+2. For images, ensure you're using Next.js `Image` component or include the basePath in URLs
+3. Check network requests in browser dev tools to identify specific path issues

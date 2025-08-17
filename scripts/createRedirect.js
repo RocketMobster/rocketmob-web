@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// Create a simple HTML redirect file that uses a more defensive approach
+// Create a simple HTML redirect file
 const redirectHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,36 +29,35 @@ const redirectHtml = `<!DOCTYPE html>
       text-decoration: underline;
     }
   </style>
+  <script>
+    // Automatic redirect with delay
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        window.location.href = "/rocketmob-web/";
+      }, 100);
+    });
+  </script>
 </head>
 <body>
   <h1>RocketMobster Software</h1>
   <p>Please click the link below to continue to our website:</p>
-  <p><a href="/rocketmob-web/index.html" id="redirect-link">Continue to RocketMobster Software</a></p>
-  
-  <script>
-    // Prevent infinite redirects by checking the URL
-    document.addEventListener('DOMContentLoaded', function() {
-      // Only redirect automatically if we're at the root, not in /rocketmob-web/
-      if (!window.location.pathname.includes('/rocketmob-web/')) {
-        // Delay redirect slightly to avoid rapid reload issues
-        setTimeout(function() {
-          window.location.href = document.getElementById('redirect-link').getAttribute('href');
-        }, 100);
-      }
-    });
-  </script>
+  <p><a href="/rocketmob-web/">Continue to RocketMobster Software</a></p>
 </body>
 </html>`;
 
 // This script runs after the build is complete
-// It creates a root index.html that redirects to /rocketmob-web/
-function copyRedirectToRoot() {
+// It ONLY creates a redirect at the ROOT level to /rocketmob-web/
+function createRootRedirect() {
   try {
     // Ensure the out directory exists
     if (fs.existsSync('out')) {
-      // Write the redirect HTML to the root of the out directory
+      // Write the redirect HTML to the root index.html ONLY
       fs.writeFileSync(path.join('out', 'index.html'), redirectHtml);
       console.log('✅ Successfully created root redirect to /rocketmob-web/');
+      
+      // Also create a 404.html with the same redirect (GitHub Pages convention)
+      fs.writeFileSync(path.join('out', '404.html'), redirectHtml);
+      console.log('✅ Created 404.html redirect');
     } else {
       console.error('❌ Output directory "out" not found!');
     }
@@ -68,4 +67,4 @@ function copyRedirectToRoot() {
 }
 
 // Run the function
-copyRedirectToRoot();
+createRootRedirect();
