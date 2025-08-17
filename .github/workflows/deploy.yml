@@ -42,9 +42,7 @@ jobs:
           static_site_generator: next
       - name: Install dependencies
         run: npm ci
-      - name: Make scripts executable
-        run: chmod +x ./scripts/ci-build.sh
-      - name: Build with Next.js
+      - name: Create Next.js config for CI
         run: |
           # Create .env file to skip TypeScript checks
           echo "NEXT_SKIP_TYPESCRIPT_CHECK=true" > .env.local
@@ -69,8 +67,11 @@ jobs:
           
           module.exports = nextConfig;
           EOL
-          # Run build with TypeScript checks disabled
-          ./scripts/ci-build.sh
+      - name: Build with Next.js
+        run: npm run build
+        env:
+          NEXT_SKIP_TYPESCRIPT_CHECK: true
+          NODE_OPTIONS: --max-old-space-size=4096
       - name: Debug - List output directory
         run: ls -la ./out
       - name: Upload artifact

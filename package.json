@@ -6,6 +6,7 @@
     "dev": "node server.js",
     "dev:turbo": "next dev --turbopack",
     "build": "node scripts/updateSiteVersion.js && next build && node scripts/createRedirect.js",
+    "build:ci": "cross-env NEXT_SKIP_TYPESCRIPT_CHECK=true node scripts/updateSiteVersion.js && cross-env NEXT_SKIP_TYPESCRIPT_CHECK=true next build && node scripts/createRedirect.js",
     "build:skip-ts": "node scripts/updateSiteVersion.js && cross-env NEXT_SKIP_TYPESCRIPT_CHECK=true next build && node scripts/createRedirect.js",
     "start": "next start",
     "lint": "next lint"
