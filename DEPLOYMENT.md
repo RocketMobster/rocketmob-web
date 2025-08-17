@@ -76,6 +76,19 @@ npx serve out
 
 This will create the same build that GitHub Actions will deploy and serve it locally for testing.
 
+## Redirection Handling
+
+The site implements a user-friendly redirection system:
+
+1. Root URL redirection:
+   - The root URL (https://rocketmobster.github.io/) presents a simple landing page
+   - Users can click to continue to the site or will be auto-redirected if at the root
+   - A conditional check prevents infinite redirect loops
+   
+2. Page not found handling:
+   - A custom 404.html page in the public directory provides friendly error messages
+   - Users can easily navigate back to the homepage from any not-found page
+
 ## Important Notes
 
 - The site uses basePath `/rocketmob-web` for all routes
