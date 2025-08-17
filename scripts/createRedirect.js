@@ -8,14 +8,17 @@ const redirectHtml = `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RocketMobster Software</title>
-  <meta http-equiv="refresh" content="0;url=/rocketmob-web/">
+  <meta http-equiv="refresh" content="0;url=/rocketmob-web/index.html">
   <link rel="icon" href="/rocketmob-web/favicon.ico" />
   <script>
-    window.location.href = "/rocketmob-web/";
+    // Check if we're already on the correct path to prevent infinite redirects
+    if (!window.location.pathname.includes('/rocketmob-web/')) {
+      window.location.href = "/rocketmob-web/index.html";
+    }
   </script>
 </head>
 <body>
-  <p>Redirecting to <a href="/rocketmob-web/">RocketMobster Software</a>...</p>
+  <p>Redirecting to <a href="/rocketmob-web/index.html">RocketMobster Software</a>...</p>
 </body>
 </html>`;
 
