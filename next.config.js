@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  // No basePath - this causes more problems than it solves
-  // No assetPrefix - let GitHub Pages handle the paths
+  // Asset prefix needs to start with slash for Next.js fonts
+  assetPrefix: "/",
   images: {
     unoptimized: true,
   },
