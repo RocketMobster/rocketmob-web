@@ -81,7 +81,6 @@ export function generateStaticParams() {
   }));
 }
 
-// @ts-ignore -- Ignoring Next.js type checking for page props
 export default function Page({ params }: { params: { slug: string } }) {
   const post = posts.find((p) => p.slug === params.slug);
   if (!post) return notFound();
