@@ -25,10 +25,22 @@
       text-decoration: underline;
     }
   </style>
+  <script>
+    // Path check to prevent infinite loops
+    document.addEventListener('DOMContentLoaded', function() {
+      // Only redirect if we're not already in the rocketmob-web path
+      var currentPath = window.location.pathname;
+      if (!currentPath.startsWith('/rocketmob-web/')) {
+        setTimeout(function() {
+          window.location.href = "/rocketmob-web/";
+        }, 1000);
+      }
+    });
+  </script>
 </head>
 <body>
   <h1>Page Not Found</h1>
   <p>Sorry, the page you're looking for doesn't exist.</p>
-  <p><a href="/rocketmob-web/index.html">Return to RocketMobster Software Homepage</a></p>
+  <p><a href="/rocketmob-web/">Return to RocketMobster Software Homepage</a></p>
 </body>
 </html>

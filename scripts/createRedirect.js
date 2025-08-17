@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// Create a simple HTML redirect file
+// Create a simple HTML redirect file with path checking to prevent infinite loops
 const redirectHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,11 +30,15 @@ const redirectHtml = `<!DOCTYPE html>
     }
   </style>
   <script>
-    // Automatic redirect with delay
+    // Path check to prevent infinite loops
     document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(function() {
-        window.location.href = "/rocketmob-web/";
-      }, 100);
+      // Only redirect if we're not already in the rocketmob-web path
+      var currentPath = window.location.pathname;
+      if (!currentPath.startsWith('/rocketmob-web/')) {
+        setTimeout(function() {
+          window.location.href = "/rocketmob-web/";
+        }, 1000);
+      }
     });
   </script>
 </head>
