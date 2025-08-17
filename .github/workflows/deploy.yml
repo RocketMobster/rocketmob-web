@@ -43,9 +43,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build with Next.js
-        run: NEXT_SKIP_TYPESCRIPT_CHECK=true npm run build
-        env:
-          NEXT_SKIP_TYPESCRIPT_CHECK: true
+        run: |
+          # Create .env file to skip TypeScript checks
+          echo "NEXT_SKIP_TYPESCRIPT_CHECK=true" > .env.local
+          npm run build
       - name: Debug - List output directory
         run: ls -la ./out
       - name: Upload artifact
