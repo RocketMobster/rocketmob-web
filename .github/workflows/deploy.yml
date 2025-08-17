@@ -68,10 +68,12 @@ jobs:
           module.exports = nextConfig;
           EOL
       - name: Build with Next.js
-        run: npm run build
+        run: npx next build
         env:
           NEXT_SKIP_TYPESCRIPT_CHECK: true
           NODE_OPTIONS: --max-old-space-size=4096
+      - name: Create redirect
+        run: node scripts/createRedirect.js
       - name: Debug - List output directory
         run: ls -la ./out
       - name: Upload artifact
