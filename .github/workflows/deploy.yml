@@ -49,11 +49,9 @@ jobs:
           # Create temporary next.config.js that ensures TypeScript and ESLint are disabled
           cat > next.config.js << 'EOL'
           /** @type {import('next').NextConfig} */
-          const repoName = "rocketmob-web";
           const nextConfig = {
             output: "export",
-            assetPrefix: `/${repoName}/`,
-            basePath: `/${repoName}`,
+            // No basePath or assetPrefix - we'll physically organize the files instead
             images: {
               unoptimized: true,
             },
@@ -73,7 +71,7 @@ jobs:
           NEXT_SKIP_TYPESCRIPT_CHECK: true
           NODE_OPTIONS: --max-old-space-size=4096
       - name: Organize files for GitHub Pages
-        run: node scripts/organizeForGitHubPages.js
+        run: node scripts/simpleDeploy.js
       - name: Debug - List output directory
         run: |
           echo "Root directory:"
