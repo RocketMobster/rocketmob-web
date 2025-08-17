@@ -72,10 +72,14 @@ jobs:
         env:
           NEXT_SKIP_TYPESCRIPT_CHECK: true
           NODE_OPTIONS: --max-old-space-size=4096
-      - name: Create redirect
-        run: node scripts/createRedirect.js
+      - name: Organize files for GitHub Pages
+        run: node scripts/organizeForGitHubPages.js
       - name: Debug - List output directory
-        run: ls -la ./out
+        run: |
+          echo "Root directory:"
+          ls -la ./out
+          echo "\nrocketmob-web directory:"
+          ls -la ./out/rocketmob-web
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

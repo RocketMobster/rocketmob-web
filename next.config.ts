@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const repoName = "rocketmob-web";
 const nextConfig: NextConfig = {
   output: "export",
+  // These settings only affect the client-side paths, not the physical output structure
   assetPrefix: `/${repoName}/`,
   basePath: `/${repoName}`,
   // Fix for Image Optimization API error with static export
