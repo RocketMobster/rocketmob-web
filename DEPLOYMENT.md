@@ -51,6 +51,7 @@ If deployment fails, check:
    - Build errors in your code
    - Missing dependencies
    - Configuration issues in `next.config.ts`
+   - Case-sensitivity issues: GitHub Actions runs on Linux which is case-sensitive, ensure file names are consistent (e.g., `CHANGELOG.md` vs `changelog.md`)
 
 ## GitHub Pages Settings
 
