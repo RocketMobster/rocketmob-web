@@ -11,6 +11,11 @@ interface GalleryImageCardProps {
 export default function GalleryImageCard({ item }: GalleryImageCardProps) {
   const [isPreviewing, setIsPreviewing] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  
+  // Ensure imageUrl has the basePath
+  const imageUrl = item.imageUrl?.startsWith('http') 
+    ? item.imageUrl 
+    : `/rocketmob-web${item.imageUrl || ''}`;
 
   // Accessibility: add alt text, lazy loading, and ARIA roles
   const handleMouseEnter = () => {
@@ -69,7 +74,7 @@ export default function GalleryImageCard({ item }: GalleryImageCardProps) {
     >
       {item.type === "image" ? (
         <Image
-          src={item.imageUrl || ""}
+          src={imageUrl}
           alt={item.title}
           width={320}
           height={192}
@@ -80,8 +85,8 @@ export default function GalleryImageCard({ item }: GalleryImageCardProps) {
         <div className="relative w-full h-48 bg-black flex items-center justify-center">
           <video
             ref={videoRef}
-            src={item.videoUrl}
-            poster={item.thumbnailUrl || item.imageUrl}
+            src={item.videoUrl?.startsWith('http') ? item.videoUrl : `/rocketmob-web${item.videoUrl || ''}`}
+            poster={item.thumbnailUrl?.startsWith('http') ? item.thumbnailUrl : `/rocketmob-web${item.thumbnailUrl || ''}`}
             className="w-full h-48 object-cover rounded"
             muted
             loop
@@ -92,7 +97,7 @@ export default function GalleryImageCard({ item }: GalleryImageCardProps) {
           />
           {!isPreviewing && (
             <Image
-              src={item.thumbnailUrl || item.imageUrl || ""}
+              src={item.thumbnailUrl?.startsWith('http') ? item.thumbnailUrl : `/rocketmob-web${item.thumbnailUrl || ''}`}
               alt={item.title}
               width={320}
               height={192}

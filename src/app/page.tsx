@@ -1,4 +1,5 @@
 
+"use client";
 
 import HeroBanner from "../components/HeroBanner";
 import { SITE_VERSION } from "../siteVersion";
@@ -6,7 +7,6 @@ import { SITE_VERSION } from "../siteVersion";
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-900 to-gray-800 text-white px-2 py-8 sm:px-4 sm:py-12">
-      {/* ...removed top-of-the-fold RocketMobster Avatar... */}
       <HeroBanner />
       <section className="w-full max-w-2xl text-center space-y-6 mb-8 animate-fade-in">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-lg">

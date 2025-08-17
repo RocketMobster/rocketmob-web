@@ -2,6 +2,9 @@
 // TODO: Connect to a real database or persistent storage
 import { NextResponse } from "next/server";
 
+// Configure this route as static for export
+export const dynamic = "force-static";
+
 // In-memory demo data (replace with DB in production)
 interface BlogPost {
   slug: string;

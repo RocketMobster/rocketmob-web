@@ -19,7 +19,7 @@ import Image from "next/image";
 const banners = [
   {
     type: "image",
-    imageSrc: "/RocketMobster_Avatar.jpeg",
+    imageSrc: "/rocketmob-web/RocketMobster_Avatar.jpeg",
     alt: "RocketMobster Avatar",
     color: "from-blue-900 to-purple-700",
     title: "RocketMobster Software",

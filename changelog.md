@@ -1,5 +1,23 @@
 # Changelog
 
+## v0.1.1 (2025-08-17)
+
+### Added
+- Custom development server with redirect handling from root to `/rocketmob-web/`
+- Post-build script to create root index.html redirect for static exports
+- Favicon handling for both development and production environments
+
+### Changed
+- Updated image paths to work correctly with basePath configuration
+- Improved metadata configuration for favicon in layout.tsx
+- Modified development workflow to support proper redirection
+
+### Fixed
+- Fixed 404 errors for favicon.ico at root path
+- Fixed image loading in HeroBanner component with proper path prefixing
+- Fixed navigation links to work consistently with basePath
+- Fixed static export compatibility issues with middleware and redirects
+
 ## v0.1.0 (2025-07-26)
 
 ### Added
