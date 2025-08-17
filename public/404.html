@@ -13,34 +13,40 @@
       margin: 0 auto;
       padding: 2rem;
       text-align: center;
+      background-color: #f9fafb;
     }
     h1 {
       margin-bottom: 1rem;
+      color: #2563eb;
     }
     a {
-      color: #0070f3;
+      color: #2563eb;
       text-decoration: none;
+      font-weight: bold;
     }
     a:hover {
       text-decoration: underline;
     }
+    .container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+    }
   </style>
-  <script>
-    // Path check to prevent infinite loops
-    document.addEventListener('DOMContentLoaded', function() {
-      // Only redirect if we're not already in the rocketmob-web path
-      var currentPath = window.location.pathname;
-      if (!currentPath.startsWith('/rocketmob-web/')) {
-        setTimeout(function() {
-          window.location.href = "/rocketmob-web/";
-        }, 1000);
-      }
-    });
-  </script>
 </head>
 <body>
-  <h1>Page Not Found</h1>
-  <p>Sorry, the page you're looking for doesn't exist.</p>
-  <p><a href="/rocketmob-web/">Return to RocketMobster Software Homepage</a></p>
+  <div class="container">
+    <div class="logo">🚀 RocketMobster Software</div>
+    <h1>Page Not Found</h1>
+    <p>Sorry, the page you're looking for doesn't exist.</p>
+    <p><a href="/">Return to Homepage</a></p>
+  </div>
 </body>
 </html>

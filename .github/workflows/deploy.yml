@@ -59,6 +59,8 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=4096
       - name: Prepare output
         run: node scripts/prepareOutput.js
+      - name: Fix paths
+        run: node scripts/fixPaths.js
       - name: Debug - List output directory
         run: ls -la ./out
       - name: Upload artifact
