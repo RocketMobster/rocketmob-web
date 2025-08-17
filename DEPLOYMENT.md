@@ -82,3 +82,5 @@ This will create the same build that GitHub Actions will deploy and serve it loc
 - Static files are served from `/rocketmob-web/` path
 - Root path (`/`) redirects to `/rocketmob-web/`
 - The build process automatically handles proper path configuration
+- The project uses Next.js static export (`output: "export"` in next.config.ts) 
+- There is no need to run `next export` separately - it's included in the build process
