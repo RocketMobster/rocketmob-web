@@ -81,7 +81,13 @@ export function generateStaticParams() {
   }));
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
+// Type for page props in Next.js 15.4.6
+type PageProps = {
+  params: { slug: string };
+  searchParams?: Record<string, string | string[] | undefined>;
+};
+
+export default function Page({ params }: PageProps) {
   const post = posts.find((p) => p.slug === params.slug);
   if (!post) return notFound();
 
