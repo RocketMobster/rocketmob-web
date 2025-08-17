@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  // No basePath or assetPrefix - we'll physically organize the files instead
+  // No basePath - this causes more problems than it solves
+  // No assetPrefix - let GitHub Pages handle the paths
   images: {
     unoptimized: true,
   },
