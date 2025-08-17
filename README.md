@@ -1,13 +1,3 @@
-# GitHub Pages Deployment
-
-To deploy your static Next.js site to GitHub Pages:
-
-1. Run `npm run build` then `npm run export`.
-2. The static site will be in the `out/` directory.
-3. Push the contents of `out/` to the `gh-pages` branch of your repository.
-4. In your GitHub repo settings, set GitHub Pages to use the `gh-pages` branch and `/` (root) as the source.
-
-You can automate the deploy with a script or GitHub Actions for future updates.
 # RocketMobster Software Public Website
 
 This is the official public website for RocketMobster Software, built with Next.js, TypeScript, and Tailwind CSS.
@@ -22,6 +12,34 @@ This is the official public website for RocketMobster Software, built with Next.
 - Admin backend (future)
 
 See `Product Requirements Document (PRD).md` for full details.
+
+## Project Structure
+
+```
+rocketmob-web/
+├── .github/            # GitHub Actions workflows
+├── public/             # Static assets
+├── scripts/            # Build scripts
+├── src/
+│   ├── app/            # Next.js app directory
+│   ├── components/     # Reusable UI components
+│   └── styles/         # Global styles
+├── next.config.ts      # Next.js configuration
+├── package.json        # Project dependencies and scripts
+├── server.js           # Custom development server
+└── tailwind.config.js  # Tailwind CSS configuration
+```
+
+## Development Guidelines
+
+- Mobile-first approach
+- Animated and interactive elements
+- Fun and nerdy design aesthetic
+- Following the product requirements document (PRD)
+
+## GitHub Pages Deployment
+
+This website is automatically deployed to GitHub Pages using GitHub Actions. For detailed information about the deployment process, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ---
 
