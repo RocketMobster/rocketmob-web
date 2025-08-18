@@ -1,6 +1,19 @@
 # GitHub Pages Deployment Guide for RocketMobster Website
 
-This guide explains how the website is deployed to GitHub Pages and what to do if you need to update or troubleshoot the deployment.
+This guide explains how the website is deployed to GitHub Pages.
+
+## Deployment Architecture
+
+The site is deployed to GitHub Pages using the following approach:
+
+1. **Next.js Static Export with BasePath**: 
+   - The site is built using Next.js static export with basePath and assetPrefix set to `/rocketmob-web`
+   - All generated content includes the correct paths for GitHub Pages
+   - The fixPaths.js script ensures all navigation links and asset references are correct
+
+2. **GitHub Pages Configuration**:
+   - The site is deployed to the repository subdirectory on GitHub Pages
+   - Example: `https://rocketmobster.github.io/rocketmob-web/`
 
 ## Automatic Deployment
 
@@ -14,9 +27,9 @@ The website is automatically deployed to GitHub Pages whenever you push changes 
    - Checks out your code
    - Sets up Node.js
    - Installs dependencies
-   - Creates a temporary Next.js config that skips TypeScript and ESLint checks
+   - Creates a simple Next.js config
    - Builds the website using `next build`
-   - Creates redirects for the root path
+   - Prepares the output directory for GitHub Pages
    - Uploads the built files to GitHub Pages
    - Deploys the website
 
@@ -52,20 +65,17 @@ If deployment fails, check:
 2. Common issues include:
    - Build errors in your code
    - Missing dependencies
-   - Configuration issues in `next.config.ts`
-   - Case-sensitivity issues: GitHub Actions runs on Linux which is case-sensitive, ensure file names are consistent (e.g., `CHANGELOG.md` vs `changelog.md`)
+   - Case-sensitivity issues: GitHub Actions runs on Linux which is case-sensitive, ensure file names are consistent
 
 ## GitHub Pages Settings
 
-If you need to change GitHub Pages settings:
+If you need to check or change GitHub Pages settings:
 
 1. Go to your GitHub repository
 2. Click on "Settings"
 3. Scroll down to "Pages" in the left sidebar
-4. Here you can:
-   - Set a custom domain
-   - Enforce HTTPS
-   - View your deployment source
+4. Ensure the source is set to "GitHub Actions"
+5. If you want a custom domain, set it here
 
 ## Local Testing Before Deployment
 
@@ -77,60 +87,3 @@ npx serve out
 ```
 
 This will create the same build that GitHub Actions will deploy and serve it locally for testing.
-
-## Understanding the Deployment Architecture
-
-The site is built with Next.js static export and deployed to GitHub Pages with the following configuration:
-
-- **Base Path**: `/rocketmob-web/` - This is where the site is deployed on GitHub Pages
-- **Repository**: https://github.com/rocketmobster/rocketmob-web
-
-### Important Technical Details:
-
-1. **Next.js Configuration**: 
-   - The site uses `next.config.ts` with:
-     - `basePath: "/rocketmob-web"`
-     - `assetPrefix: "/rocketmob-web/"`
-     - `output: "export"`
-
-2. **Physical vs. Virtual Paths**:
-   - Next.js `basePath` doesn't create a physical `/rocketmob-web/` folder in the build output
-   - The paths are handled by GitHub Pages when deployed
-   - All content is physically in the root of the output folder but served at `/rocketmob-web/` path
-
-3. **Redirection Handling**:
-   - The `scripts/createRedirect.js` creates:
-     - A root `index.html` that redirects to `/rocketmob-web/`
-     - A `404.html` with the same redirect (GitHub Pages convention)
-   - This script only creates redirects at the ROOT level, not inside the `/rocketmob-web/` path
-   - This prevents infinite redirect loops
-
-4. **TypeScript and ESLint Handling**:
-   - The build process skips TypeScript and ESLint checks during CI
-   - This is necessary to handle dynamic route type errors without failing the build
-
-## Common Issues and Solutions
-
-### Infinite Redirects
-
-If you experience an infinite redirect loop when accessing the site:
-
-1. Check that the redirect script (`scripts/createRedirect.js`) is only creating redirects at the root level
-2. Ensure the redirect URL is correct (`/rocketmob-web/` not `/rocketmob-web/index.html`)
-3. Make sure there's no redirect file inside the `/rocketmob-web/` path
-
-### 404 Errors
-
-If you get 404 errors on some pages:
-
-1. Check that all pages are being correctly generated in the build output
-2. Verify that links in your code use the correct paths (relative to the basePath)
-3. Ensure the GitHub Pages deployment completed successfully
-
-### Asset Loading Issues
-
-If images or other assets aren't loading:
-
-1. Verify all asset URLs use the correct path with the `assetPrefix`
-2. For images, ensure you're using Next.js `Image` component or include the basePath in URLs
-3. Check network requests in browser dev tools to identify specific path issues

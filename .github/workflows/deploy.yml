@@ -39,7 +39,8 @@ jobs:
           /** @type {import('next').NextConfig} */
           const nextConfig = {
             output: "export",
-            assetPrefix: "/",
+            basePath: '/rocketmob-web',
+            assetPrefix: "/rocketmob-web",
             images: {
               unoptimized: true,
             },
