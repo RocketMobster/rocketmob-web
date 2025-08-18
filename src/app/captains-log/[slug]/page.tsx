@@ -8,10 +8,62 @@ const posts = [
     title: "Demo: All Blog Features",
     date: "2025-07-27",
     tags: ["demo", "features", "markdown"],
-    content: [
-      '# Demo: All Blog Features',
-      // Content truncated for brevity
-    ].join('\n'),
+    content: `# Demo: All Blog Features
+
+This post demonstrates all the blog features available in The Captain's Log.
+
+## Text Formatting
+
+You can use **bold**, *italic*, or ~~strikethrough~~ formatting. You can also include [links](https://rocketmobster.github.io/rocketmob-web/).
+
+## Code Blocks
+
+Here's a code example:
+
+\`\`\`javascript
+// A simple JavaScript function
+function greet(name) {
+  return \`Hello, \${name}! Welcome aboard the RocketMobster!\`;
+}
+
+console.log(greet('Captain'));
+\`\`\`
+
+## Lists
+
+Unordered list:
+- Item 1
+- Item 2
+- Item 3
+
+Ordered list:
+1. First step
+2. Second step
+3. Third step
+
+## Blockquotes
+
+> "Space isn't remote at all. It's only an hour's drive away if your car could go straight upwards."
+> — Fred Hoyle
+
+## Images
+
+We can add images to blog posts:
+
+![Example Image](/rocketmob-web/RocketMobster_Avatar.jpeg)
+
+## Tables
+
+| Feature | Supported |
+|---------|-----------|
+| Markdown | ✅ |
+| Code blocks | ✅ |
+| Images | ✅ |
+| Tables | ✅ |
+
+## That's It!
+
+Thanks for checking out the blog features demo!`,
   },
   {
     slug: "welcome-to-the-captains-log",
