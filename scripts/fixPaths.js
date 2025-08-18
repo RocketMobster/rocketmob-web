@@ -59,6 +59,12 @@ function fixPaths() {
             modified = true;
           }
 
+          // Another check for double prefixes in different formats
+          if (content.includes(`${basePath}${basePath}`)) {
+            content = content.replace(new RegExp(`${basePath}${basePath}`, 'g'), `${basePath}`);
+            modified = true;
+          }
+
           // GitHub Pages can have issues with paths starting with /_next
           // This ensures that asset paths are correctly formatted for GitHub Pages
           if (content.includes('"/_next/')) {
@@ -69,6 +75,14 @@ function fixPaths() {
           // Fix other static asset paths with absolute references
           if (content.includes('"./_next/')) {
             content = content.replace(/"\.\/_next\//g, `"${basePath}/_next/`);
+            modified = true;
+          }
+          
+          // Final check for any double occurrences of the basePath in links
+          // This regex finds any href or src attributes with a double basePath
+          const doubleBasePathPattern = new RegExp(`(href|src)="(${basePath})\\/(${basePath.substring(1)}|${basePath})\\/(.*?)"`, 'g');
+          if (doubleBasePathPattern.test(content)) {
+            content = content.replace(doubleBasePathPattern, `$1="${basePath}/$4"`);
             modified = true;
           }
           
